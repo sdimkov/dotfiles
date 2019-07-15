@@ -54,7 +54,7 @@
   re = reset
 
   # Pull
-  pl = pull
+  pl = pull --rebase --autostash --prune
 
   # Fetch
   fe = fetch
