@@ -1,5 +1,8 @@
 # External dependencies: 
 #   fzf, xargs, cut, grep, gpg, interactive-rebase-tool
+#
+# Environment:
+#   MAIN_BRANCH: [Optional] Name of the main development branch. Defaults to `master`
 
 [user]
   email = stoyan.dimkov@gmail.com
