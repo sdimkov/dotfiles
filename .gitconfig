@@ -1,0 +1,80 @@
+# External dependencies: 
+#   fzf, xargs, cut, grep, gpg, interactive-rebase-tool
+
+[user]
+  email = stoyan.dimkov@gmail.com
+  name = Stoyan Dimkov
+  signingkey = 7E6052A7E608133C0F4E1A016128B9D0209B5D32!
+
+[alias]
+  # Checkout
+  co = checkout
+  bc = !git checkout $(git branch --color=always | fzf --ansi --reverse | tr -d '*')
+
+  # Branch
+  br = branch
+  bn = rev-parse --abbrev-ref HEAD
+  mbase = !git merge-base HEAD ${MAIN_BRANCH:-master}
+  delete-merged-branches = !git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d
+
+  # Commit
+  ci = commit
+  ca = commit --amend
+  cf = !git commit --fixup $(git pc)
+
+  # Show
+  so = show
+  sc = !git show $(git pc)
+  sn = !git show --name-only $(git pc)
+
+  # Status
+  st = status --short --branch
+
+  # Log
+  lg = log --color=always --pretty=format:'%C(yellow)%h %Cblue%>(17)%an %Cred%<(15)%ar%C(auto) %s' 
+  lb = !git --no-pager lg $(git mbase)..
+  pc = !git lb | fzf --ansi --reverse --height 20 --select-1 | cut -d ' ' -f1
+
+  # Diff
+  df = diff --color-words
+  dr = !git diff --color-words $(git pick-remote)/$(git rev-parse --abbrev-ref HEAD) HEAD
+  dc = diff --color-words --cached
+
+  # Rebase
+  rb = !git rebase --interactive --autosquash $(git mbase)
+  rbc = rebase --continue
+  rba = rebase --abort
+
+  # Reset
+  re = reset
+
+  # Pull
+  pl = pull
+
+  # Fetch
+  fe = fetch
+
+  # Push
+  pu = push
+  pf = push --force-with-lease
+  publish = !git push -u $(git pick-remote) $(git rev-parse --abbrev-ref HEAD)
+  
+  # Remote
+  pick-remote = !git remote | fzf --reverse --height 10 --select-1
+
+  # Stash
+  ss = stash
+  sp = stash pop
+  sd = stash show -p
+
+[core]
+  excludesfile = ~/.gitignore_global
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  program = /usr/local/bin/gpg
+
+[sequence]
+  editor = interactive-rebase-tool
