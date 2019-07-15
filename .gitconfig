@@ -31,7 +31,7 @@
   st = status --short --branch
 
   # Log
-  lg = log --color=always --pretty=format:'%C(yellow)%h %Cblue%>(17)%an %Cred%<(15)%ar%C(auto) %s' 
+  lg = log --color=always --pretty=tformat:'%C(yellow)%h %Cblue%>(17)%an %Cred%<(15)%ar%C(auto) %s' 
   lb = !git --no-pager lg $(git mbase)..
   pc = !git lb | fzf --ansi --reverse --height 20 --select-1 | cut -d ' ' -f1
 
