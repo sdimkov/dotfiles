@@ -7,7 +7,7 @@
 [user]
   email = stoyan.dimkov@gmail.com
   name = Stoyan Dimkov
-  signingkey = 7E6052A7E608133C0F4E1A016128B9D0209B5D32!
+  signingkey = 209B5D32!
 
 [alias]
   # Checkout
@@ -26,9 +26,9 @@
   cf = !git commit --fixup $(git pc)
 
   # Show
-  so = show
-  sc = !git show $(git pc)
-  sn = !git show --name-only $(git pc)
+  so = show --show-signature
+  sc = !git show --show-signature $(git pc)
+  sn = !git show --show-signature --name-only $(git pc)
 
   # Status
   st = status --short --branch
@@ -36,7 +36,7 @@
   # Log
   lg = log --color=always --pretty=tformat:'%C(yellow)%h %Cblue%>(17)%an %Cred%<(15)%ar%C(auto) %s'
   lb = !git --no-pager lg $(git mbase)..
-  pc = !git lb | fzf --ansi --reverse --height 20 --select-1 | cut -d ' ' -f1
+  pc = !git lg | fzf --ansi --reverse --height 20 --select-1 | cut -d ' ' -f1
 
   # Diff
   df = diff --color-words
@@ -73,13 +73,14 @@
   sd = stash show -p
 
 [core]
+  editor = nvim
   excludesfile = ~/.gitignore_global
 
 [commit]
   gpgsign = true
 
 [gpg]
-  program = /usr/local/bin/gpg
+  format = openpgp
 
 [sequence]
   editor = interactive-rebase-tool
