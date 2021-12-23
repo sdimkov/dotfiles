@@ -40,11 +40,12 @@ let g:Lf_HideHelp = 1
 autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") |  exe "normal! g'\"" | endif
 
 " NERDTree
-let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeQuitOnOpen = 0
+let g:NERDTreeMouseMode  = 3
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 50
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Key mappings
@@ -53,3 +54,5 @@ noremap <leader>` :NERDTreeFind<CR>|        " Open current file in NerdTree
 noremap m :Leaderf mru<CR>|                 " Most recent files
 noremap <leader>s :Leaderf! rg |            " Global text search
 vnoremap s "zy:Leaderf! rg -F '<C-R>z'<CR>| " Find usages of selected text
+noremap <leader>w :bd<CR>                   " Close current buffer
+noremap <leader>q :q!<CR>                   " Quit Vim
