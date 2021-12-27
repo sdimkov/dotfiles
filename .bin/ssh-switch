@@ -1,0 +1,35 @@
+#!/bin/zsh
+# SSH profile switcher
+#
+# Assumes that .ssh is a symlink to .ssh.<profile-name> directories
+# Depends on: fzf, readlink, xargs, basename, cut
+
+SSH_PATH=~/.ssh
+
+# ANSI Colors
+B='\033[1m'  # Bold
+N='\033[0m'  # Normal
+
+# Ensure SSH_PATH is currently a valid symlink
+if ! ( [ -L $SSH_PATH ] && [ -e $SSH_PATH ] ); then
+  echo "$B${SSH_PATH}$N is not a valid symlink!"
+  return 1
+fi
+
+# Identify current SSH profile
+current=$(readlink $SSH_PATH | xargs basename | cut -c 6-)
+[ -z "$current" ] && return 1
+echo "Current profile: $B$current$N"
+
+# Let the user select a new profile
+profile=$(basename -a $SSH_PATH.* | cut -c 6- | fzf --ansi --reverse --height 10 --select-1)
+[ -z "$profile" ] && return 1  # No selection was made
+if [ "$current" = "$profile" ]; then
+  echo "Profile unchanged."
+  return 0
+fi
+
+# Apply the change
+rm $SSH_PATH
+ln -s $SSH_PATH.${profile} $SSH_PATH
+echo "Switched to profile: $B${profile}$N"
