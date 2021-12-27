@@ -1,5 +1,5 @@
 call plug#begin()
-Plug 'joshdick/onedark.vim'
+Plug 'drewtempelmeyer/palenight.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
@@ -22,12 +22,10 @@ set list listchars=tab:»\ ,trail:·
 
 " Theme
 syntax on
-colorscheme onedark
 set termguicolors
-
-" Status line
 set noshowmode
-let g:lightline = { 'colorscheme': 'onedark' }
+colorscheme palenight
+let g:lightline = { 'colorscheme': 'palenight' }
 
 " Git Gutter
 set signcolumn=yes
@@ -50,6 +48,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " Key mappings
 noremap ` :NERDTreeToggle<CR>|              " Toggle NerdTree
+noremap § :NERDTreeToggle<CR>|              " Toggle NerdTree (M1 layout)
 noremap <leader>` :NERDTreeFind<CR>|        " Open current file in NerdTree
 noremap m :Leaderf mru<CR>|                 " Most recent files
 noremap <leader>s :Leaderf! rg |            " Global text search
