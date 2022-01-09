@@ -30,6 +30,5 @@ if [ "$current" = "$profile" ]; then
 fi
 
 # Apply the change
-rm $SSH_PATH
-ln -s $SSH_PATH.${profile} $SSH_PATH
+ln -sfn $SSH_PATH.${profile} $SSH_PATH
 echo "Switched to profile: $B${profile}$N"
