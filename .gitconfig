@@ -5,11 +5,19 @@
 #   MAIN_BRANCH: [Optional] Name of the main development branch. Defaults to `master`
 
 [user]
-  email = stoyan.dimkov@gmail.com
   name = Stoyan Dimkov
   signingkey = 209B5D32!
+  useConfigOnly = true    # Stop Git from guessing email / name / etc
 
 [alias]
+  # Identity
+  email       = config user.email
+  personal    = config user.email stoyan.dimkov@gmail.com
+  sensortower = config user.email stoyan.dimkov@sensortower.com
+  carbonblack = config user.email sdimkov@carbonblack.com  
+  vmware      = config user.email sdimkov@vmware.com
+  toptal      = config user.email stoyan@toptal.com
+
   # Checkout
   co = checkout
   bc = !git checkout $(git branch --color=always | fzf --ansi --reverse | tr -d '*')
