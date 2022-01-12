@@ -7,16 +7,29 @@
 [user]
   name = Stoyan Dimkov
   signingkey = 209B5D32!
-  useConfigOnly = true    # Stop Git from guessing email / name / etc
+  useConfigOnly = true
+
+[core]
+  editor = nvim
+  excludesfile = ~/.gitignore_global
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  format = openpgp
+
+[sequence]
+  editor = interactive-rebase-tool
 
 [alias]
   # Identity
-  email       = config user.email
-  personal    = config user.email stoyan.dimkov@gmail.com
-  sensortower = config user.email stoyan.dimkov@sensortower.com
-  carbonblack = config user.email sdimkov@carbonblack.com  
-  vmware      = config user.email sdimkov@vmware.com
-  toptal      = config user.email stoyan@toptal.com
+  email = config user.email
+  personal    = email stoyan.dimkov@gmail.com
+  sensortower = email stoyan.dimkov@sensortower.com
+  carbonblack = email sdimkov@carbonblack.com
+  vmware      = email sdimkov@vmware.com
+  toptal      = email stoyan@toptal.com
 
   # Checkout
   co = checkout
@@ -26,7 +39,7 @@
   br = branch
   bn = rev-parse --abbrev-ref HEAD
   mbase = !git merge-base HEAD ${MAIN_BRANCH:-master}
-  delete-merged-branches = !git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d
+  delete-merged-branches = !git branch --merged | grep  -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d
 
   # Commit
   ci = commit
@@ -79,16 +92,3 @@
   ss = stash
   sp = stash pop
   sd = stash show -p
-
-[core]
-  editor = nvim
-  excludesfile = ~/.gitignore_global
-
-[commit]
-  gpgsign = true
-
-[gpg]
-  format = openpgp
-
-[sequence]
-  editor = interactive-rebase-tool
