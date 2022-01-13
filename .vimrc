@@ -47,11 +47,14 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Key mappings
-noremap ` :NERDTreeToggle<CR>|              " Toggle NerdTree
-noremap § :NERDTreeToggle<CR>|              " Toggle NerdTree (M1 layout)
-noremap <leader>` :NERDTreeFind<CR>|        " Open current file in NerdTree
-noremap m :Leaderf mru<CR>|                 " Most recent files
-noremap <leader>s :Leaderf! rg |            " Global text search
-vnoremap s "zy:Leaderf! rg -F '<C-R>z'<CR>| " Find usages of selected text
-noremap <leader>w :bd<CR>                   " Close current buffer
-noremap <leader>q :q!<CR>                   " Quit Vim
+noremap  <silent> `         :NERDTreeToggle<CR>|      " Toggle NerdTree
+noremap  <silent> §         :NERDTreeToggle<CR>|      " Toggle NerdTree (M1 layout)
+noremap  <silent> <leader>` :NERDTreeFind<CR>|        " Open current file in NerdTree
+noremap  <silent> <leader>§ :NERDTreeFind<CR>|        " Open current file in NerdTree (M1 layout)
+noremap  <silent> m :Leaderf mru<CR>|                 " Most recent files
+noremap  <silent> <leader>s :Leaderf! rg |            " Global text search
+vnoremap <silent> s "zy:Leaderf! rg -F '<C-R>z'<CR>|  " Find usages of selected text
+noremap  <silent> <Tab>     :bp<CR>|                  " Go to prev buffer
+noremap  <silent> <S-Tab>   :bn<CR>|                  " Go to next buffer
+noremap  <silent> <leader>w :bd<CR>|                  " Close current buffer
+noremap  <silent> <leader>q :q!<CR>|                  " Quit Vim
