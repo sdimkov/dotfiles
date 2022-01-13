@@ -26,6 +26,7 @@ set termguicolors
 set noshowmode
 colorscheme palenight
 let g:lightline = { 'colorscheme': 'palenight' }
+set laststatus=2
 
 " Git Gutter
 set signcolumn=yes
