@@ -92,3 +92,7 @@
   ss = stash
   sp = stash pop
   sd = stash show -p
+
+  # Config
+  ec  = "!git config --edit --file ~/.gitconfig$1 #"  # opens .gitconfig by default or .gitconfig<suffix> if given
+  ecc = !git config --edit --file $(ls ~/.gitconfig* | fzf --ansi --reverse --height 10 --select-1)  # picks via fzf
